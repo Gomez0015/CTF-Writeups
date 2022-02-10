@@ -83,7 +83,7 @@ Lets go back to the mySQL we found earlier in `/var/www/files/index.php` and log
 
 ![[Screen Shot 2022-02-10 at 6.05.57 PM.png]]
 
-After running `show tables;` and  `SELECT * from users;` we can see we get the md5 hash of anurodh account, so lets crack that using [Crack Station](https://crackstation.net/) ![[https://github.com/Gomez0015/CTF-Writeups/📄%20CTF%20Writeups/images/Screen Shot 2022-02-10 at 6.18.23 PM.png]] and we get a postive result! Lets try loging in with ssh now.
+After running `show tables;` and  `SELECT * from users;` we can see we get the md5 hash of anurodh account, so lets crack that using [Crack Station](https://crackstation.net/) ![[https://github.com/Gomez0015/CTF-Writeups/📄%20CTF%20Writeups/images/Screen%20Shot%202022-02-10%20at%206.18.23%20PM.png]] and we get a postive result! Lets try loging in with ssh now.
 
 Did not work. But I did see something intresting earlier in the `/var/www/files/hacker.php` file:
 
