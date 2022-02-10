@@ -81,9 +81,9 @@ We can also gain ssh access by adding our public ssh key to `.ssh/authorized_key
 
 Lets go back to the mySQL we found earlier in `/var/www/files/index.php` and login with `mysql -u root -p -D webportal`
 
-![[Screen Shot 2022-02-10 at 6.05.57 PM.png]]
+![mySQL Users](https://github.com/Gomez0015/CTF-Writeups/blob/main/📄%20CTF%20Writeups/Images/Screen%20Shot%202022-02-10%20at%206.27.07%20PM.png)
 
-After running `show tables;` and  `SELECT * from users;` we can see we get the md5 hash of anurodh account, so lets crack that using [Crack Station](https://crackstation.net/) ![[https://github.com/Gomez0015/CTF-Writeups/📄%20CTF%20Writeups/images/Screen%20Shot%202022-02-10%20at%206.18.23%20PM.png]] and we get a postive result! Lets try loging in with ssh now.
+After running `show tables;` and  `SELECT * from users;` we can see we get the md5 hash of anurodh account, so lets crack that using [Crack Station](https://crackstation.net/) ![Cracked Md5](https://github.com/Gomez0015/CTF-Writeups/blob/main/📄%20CTF%20Writeups/Images/Screen%20Shot%202022-02-10%20at%206.05.57%20PM.png) and we get a postive result! Lets try loging in with ssh now.
 
 Did not work. But I did see something intresting earlier in the `/var/www/files/hacker.php` file:
 
@@ -106,7 +106,7 @@ Now lets run steghide on it `steghide --info hacker-with-laptop_23-2147985341.jp
 
 After extracting it if we try to `unzip backup.zip` it asks for a passphrase so we can try the md5 hashes we cracked earlier. None of them worked so I decided to use john,
 first run `zip2john backup.zip | tee hash` to generate a hash file and then we can crack it using `john hash --wordlist=/usr/share/wordlists/rockyou.txt` 
-![[Screen Shot 2022-02-10 at 6.27.07 PM.png]] And in a couple seconds we get a successfull password.
+![Cracked Zip](https://github.com/Gomez0015/CTF-Writeups/blob/main/📄%20CTF%20Writeups/Images/Screen%20Shot%202022-02-10%20at%206.27.07%20PM.png) And in a couple seconds we get a successfull password.
 
 Upon using `cat source_code.php` we can see an intresting line:
 `if(base64_encode($password) == "IWQwbnRLbjB3bVlwQHNzdzByZA==")`
