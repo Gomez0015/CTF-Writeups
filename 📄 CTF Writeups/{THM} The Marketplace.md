@@ -40,7 +40,7 @@ Nmap done: 1 IP address (1 host up) scanned in 22.45 seconds
 
 So as we can see we have a simple structure of an ssh login on port 22 and an http webserver on port 80 that is mirrored for nodejs on port 32768. So lets head over to the website! While looking over the website I will run gobuster in the back to find hidden directories.
 
-Okay so we can signup lets do that first thing that catches my eye is the new listing featurenwe can probably upload a revshell there. (Also gobuster returned nothing intresting.) After trying to upload an image I see they have blocked that by putting a No image placeholder:
+Okay so we can signup lets do that first thing that catches my eye is the 'new listing' feature we can probably upload a revshell there. (Also gobuster returned nothing intresting.) After trying to upload an image I see they have blocked that by putting a No image placeholder:
 
 ![Screen1](https://github.com/Gomez0015/CTF-Writeups/blob/main/📄%20CTF%20Writeups/Images/Screen%20Shot%202022-03-08%20at%207.01.31%20PM.png)
 
