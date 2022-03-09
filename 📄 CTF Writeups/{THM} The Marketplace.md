@@ -2,7 +2,7 @@
 
 Lets start with some recon `nmap -A -sS -T4 <IP>`
 
-Rsults:
+Results:
 ```
 Starting Nmap 7.92 ( https://nmap.org ) at 2022-03-08 13:06 EST
 Nmap scan report for 10.10.215.43
